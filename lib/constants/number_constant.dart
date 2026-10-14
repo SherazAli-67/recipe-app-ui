@@ -18,7 +18,13 @@ class NumberConstant {
   static const weekImageGap = 14.0;
   static const avatarSize = 44.0;
   static const circularButtonPadding = 12.5;
+  static const favoriteHeartPadding = 7.0;
   static const iconButtonPadding = 13.0;
+  static const timeBadgeHorizontalPadding = 13.0;
+  static const timeBadgeVerticalPadding = 7.0;
+  static const bottomNavTopPadding = 16.0;
+  static const bottomNavBottomPadding = 20.0;
+  static const bottomNavItemGap = 6.0;
   static const timeBadgeRadius = 18.0;
   static const primaryButtonHeight = 45.0;
   static const primaryButtonRadius = 28.0;
