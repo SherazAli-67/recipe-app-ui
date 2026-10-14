@@ -235,6 +235,26 @@ class AppData {
           'Whisk oil, lemon, and honey for dressing. Toss greens with citrus and feta, then dress lightly before serving.',
       isFavorite: true,
     ),
+    RecipeModel(
+      id: '11',
+      title: 'Sesame Crunch Salad',
+      description: 'Crispy greens with sesame dressing...',
+      imagePath: AssetRes.roastedTofuImg,
+      cookTime: '20 mins',
+      category: StringConst.salad,
+      rating: 4.3,
+      difficulty: 'Easy',
+      ingredients: [
+        'Napa cabbage',
+        'Carrot',
+        'Sesame oil',
+        'Rice vinegar',
+        'Toasted sesame',
+      ],
+      directions:
+          'Shred cabbage and carrot. Whisk sesame oil and rice vinegar, toss with greens, and finish with toasted sesame.',
+      isFavorite: true,
+    ),
   ];
 
   static List<RecipeModel> get recommendations => recipes.take(3).toList();

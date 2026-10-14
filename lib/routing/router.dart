@@ -8,8 +8,9 @@ import 'package:recipe_app_ui/presentation/screens/home_screen.dart';
 import 'package:recipe_app_ui/presentation/screens/main_shell.dart';
 import 'package:recipe_app_ui/presentation/screens/profile_screen.dart';
 import 'package:recipe_app_ui/presentation/screens/recipe_detail_screen.dart';
-import 'package:recipe_app_ui/presentation/screens/saved_screen.dart';
+import 'package:recipe_app_ui/presentation/screens/favorites_screen.dart';
 import 'package:recipe_app_ui/presentation/screens/search_screen.dart';
+import 'package:recipe_app_ui/providers/favorites_provider.dart';
 import 'package:recipe_app_ui/providers/home_provider.dart';
 import 'package:recipe_app_ui/providers/recipe_detail_provider.dart';
 
@@ -42,7 +43,10 @@ GoRouter router = GoRouter(
           routes: [
             GoRoute(
               path: NamedRoutes.saved.routeName,
-              builder: (context, state) => const SavedScreen(),
+              builder: (context, state) => ChangeNotifierProvider(
+                create: (_) => FavoritesProvider(),
+                child: const FavoritesScreen(),
+              ),
             ),
           ],
         ),

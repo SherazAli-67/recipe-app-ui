@@ -30,4 +30,5 @@ class StringConst {
   static const watchVideo = 'Watch Video';
   static const imagePageIndicator = '1 - 8';
   static const recipeNotFound = 'Recipe not found';
+  static const noFavorites = 'No favorites yet';
 }
