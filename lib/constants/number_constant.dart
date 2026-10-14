@@ -31,6 +31,17 @@ class NumberConstant {
   static const bottomNavHeight = 96.0;
   static const accordionRowHeight = 62.0;
   static const detailHeroHeight = 287.0;
+  static const detailHeroRadius = 11.0;
+  static const detailMetaGap = 29.0;
+  static const detailMetaIconGap = 8.0;
+  static const detailRatingGap = 9.0;
+  static const detailDescriptionTopPadding = 22.0;
+  static const detailAccordionTopPadding = 20.0;
+  static const imageBadgeRadius = 17.0;
+  static const imageBadgeHorizontalPadding = 14.0;
+  static const imageBadgeVerticalPadding = 6.0;
+  static const primaryButtonHorizontalPadding = 28.0;
+  static const watchVideoBottomOffset = 24.0;
   static const homeContentTopPadding = 20.0;
   static const categoryEmojiSize = 19.0;
 }

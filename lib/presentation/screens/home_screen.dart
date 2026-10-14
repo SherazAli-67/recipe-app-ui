@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app_ui/constants/number_constant.dart';
 import 'package:recipe_app_ui/constants/string_const.dart';
@@ -12,6 +13,7 @@ import 'package:recipe_app_ui/core/models/recipe_model.dart';
 import 'package:recipe_app_ui/presentation/widgets/circular_icon_button.dart';
 import 'package:recipe_app_ui/presentation/widgets/recipe_card.dart';
 import 'package:recipe_app_ui/providers/home_provider.dart';
+import 'package:recipe_app_ui/routing/router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -223,7 +225,10 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: .horizontal,
           itemCount: recipes.length,
           separatorBuilder: (context, index) => const SizedBox(width: NumberConstant.recipeCardGap),
-          itemBuilder: (context, index) => RecipeCard(recipe: recipes[index],),
+          itemBuilder: (context, index) => RecipeCard(
+            recipe: recipes[index],
+            onTap: () => context.push(NamedRoutes.recipeDetailPath(recipes[index].id)),
+          ),
         ),
       ),
     );

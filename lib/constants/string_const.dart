@@ -28,4 +28,6 @@ class StringConst {
   static const ingredients = 'Ingredients';
   static const directions = 'Directions';
   static const watchVideo = 'Watch Video';
+  static const imagePageIndicator = '1 - 8';
+  static const recipeNotFound = 'Recipe not found';
 }
