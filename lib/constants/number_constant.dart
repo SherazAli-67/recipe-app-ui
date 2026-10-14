@@ -1,0 +1,30 @@
+class NumberConstant {
+  static const horizontalPadding = 24.0;
+  static const homeHeaderBottomPadding = 18.0;
+  static const searchFieldHeight = 51.0;
+  static const categoryChipHeight = 40.0;
+  static const categoryChipRadius = 22.0;
+  static const categoryChipGap = 7.0;
+  static const sectionHeaderTopPadding = 28.0;
+  static const recipeCardWidth = 177.0;
+  static const recipeCardImageHeight = 200.0;
+  static const recipeCardGap = 13.0;
+  static const recipeCardRadius = 10.0;
+  static const favoriteCardWidth = 179.0;
+  static const favoriteCardImageHeight = 199.0;
+  static const favoriteCardGap = 12.0;
+  static const favoriteGridRowGap = 16.0;
+  static const weekImageHeight = 124.0;
+  static const weekImageGap = 14.0;
+  static const avatarSize = 44.0;
+  static const circularButtonPadding = 12.5;
+  static const iconButtonPadding = 13.0;
+  static const timeBadgeRadius = 18.0;
+  static const primaryButtonHeight = 45.0;
+  static const primaryButtonRadius = 28.0;
+  static const bottomNavHeight = 96.0;
+  static const accordionRowHeight = 62.0;
+  static const detailHeroHeight = 287.0;
+  static const homeContentTopPadding = 20.0;
+  static const categoryEmojiSize = 19.0;
+}
