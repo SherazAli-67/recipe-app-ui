@@ -41,4 +41,9 @@ class NumberConstant {
   static const homeContentTopPadding = 20.0;
   static const categoryEmojiSize = 19.0;
   static const searchRadius = 99.0;
+  static const animFast = 200;
+  static const animMedium = 280;
+  static const animSlow = 350;
+  static const animStaggerStep = 40;
+  static const animSlideOffset = 16.0;
 }

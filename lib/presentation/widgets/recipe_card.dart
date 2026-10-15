@@ -39,54 +39,54 @@ class RecipeCard extends StatelessWidget {
           crossAxisAlignment: .start,
           children: [
             Expanded(
-              child: ClipRRect(
-                borderRadius: .circular(NumberConstant.recipeCardRadius),
-                child: Stack(
-                  fit: .expand,
-                  children: [
-                    Positioned.fill(
-                      child: const SizedBox(),
-                          //cachedNetworkImg: recipe.image, fit.cover, width: width, height: imageHeight
-                    ),
-                    if (showTimeBadge)
-                      Positioned(
-                        left: 11,
-                        top: 11,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            // color: AppColors.timeBadgeColor,
-                            // borderRadius: .circular(NumberConstant.timeBadgeRadius),
-                          ),
-                          child: Padding(
-                            padding: .symmetric(
-                              horizontal: NumberConstant.timeBadgeHorizontalPadding,
-                              vertical: NumberConstant.timeBadgeVerticalPadding,
-                            ),
-                            //recipe.cookTime, timeBadge
-                            child: const SizedBox()
-                          ),
-                        ),
+              child: Hero(
+                tag: 'recipe-image-${recipe.id}',
+                child: ClipRRect(
+                  borderRadius: .circular(NumberConstant.recipeCardRadius),
+                  child: Stack(
+                    fit: .expand,
+                    children: [
+                      Positioned.fill(
+                        child: CachedNetworkImage(imageUrl: recipe.imagePath, fit: .cover, width: width, height: imageHeight,),
                       ),
-                    if (showFavoriteButton)
-                      Positioned(
-                        left: 10,
-                        top: 10,
-                        child: GestureDetector(
-                          onTap: onFavoriteTap,
+                      if (showTimeBadge)
+                        Positioned(
+                          left: 11,
+                          top: 11,
                           child: DecoratedBox(
                             decoration: BoxDecoration(
-                              // color: AppColors.whiteColor,
-                              // shape: .circle,
+                              color: AppColors.timeBadgeColor,
+                              borderRadius: .circular(NumberConstant.timeBadgeRadius),
                             ),
                             child: Padding(
-                              padding: .all(NumberConstant.favoriteHeartPadding),
-                              //icHeart
-                              child: const SizedBox()
+                              padding: .symmetric(
+                                horizontal: NumberConstant.timeBadgeHorizontalPadding,
+                                vertical: NumberConstant.timeBadgeVerticalPadding,
+                              ),
+                              child: Text(recipe.cookTime, style: AppTextStyles.timeBadge,),
                             ),
                           ),
                         ),
-                      ),
-                  ],
+                      if (showFavoriteButton)
+                        Positioned(
+                          left: 10,
+                          top: 10,
+                          child: GestureDetector(
+                            onTap: onFavoriteTap,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: AppColors.whiteColor,
+                                shape: .circle,
+                              ),
+                              child: Padding(
+                                padding: .all(NumberConstant.favoriteHeartPadding),
+                                child: SvgPicture.asset(AssetRes.icHeart,),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -94,7 +94,7 @@ class RecipeCard extends StatelessWidget {
               padding: .only(top: useSmallTitle ? 10 : 9),
               //recipe.title
               child: Text(
-                '',
+                recipe.title,
                 style: useSmallTitle ? AppTextStyles.recipeCardTitleSmall : AppTextStyles.recipeCardTitle,
                 maxLines: 1,
                 overflow: .ellipsis,
@@ -102,7 +102,7 @@ class RecipeCard extends StatelessWidget {
             ),
             //recipe.description
             Text(
-              '',
+              recipe.description,
               style: AppTextStyles.recipeCardDescription,
               maxLines: 1,
               overflow: .ellipsis,

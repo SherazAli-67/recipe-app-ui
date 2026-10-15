@@ -11,6 +11,7 @@ import 'package:recipe_app_ui/core/asset_res.dart';
 import 'package:recipe_app_ui/core/models/category_model.dart';
 import 'package:recipe_app_ui/core/models/recipe_model.dart';
 import 'package:recipe_app_ui/presentation/widgets/circular_icon_button.dart';
+import 'package:recipe_app_ui/presentation/widgets/fade_slide_in.dart';
 import 'package:recipe_app_ui/presentation/widgets/recipe_card.dart';
 import 'package:recipe_app_ui/providers/home_provider.dart';
 import 'package:recipe_app_ui/routing/router.dart';
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height * 0.38,
             child: DecoratedBox(
               decoration: BoxDecoration(
-              /*  gradient: LinearGradient(
+                gradient: LinearGradient(
                   begin: .topCenter,
                   end: .bottomCenter,
                   colors: [
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     AppColors.whiteColor,
                   ],
                   stops: const [0, 0.72, 1],
-                ),*/
+                ),
               ),
             ),
           ),
@@ -55,9 +56,12 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: .start,
                       spacing: 18,
                       children: [
-                        _buildHeader(),
-                        //${StringConst.heroTitleLine1}\n${StringConst.heroTitleLine2}, heroTitle
-                        _buildSearchField(),
+                        FadeSlideIn(delay: 0, child: _buildHeader(),),
+                        FadeSlideIn(
+                          delay: NumberConstant.animStaggerStep,
+                          child: Text('${StringConst.heroTitleLine1}\n${StringConst.heroTitleLine2}', style: AppTextStyles.heroTitle,),
+                        ),
+                        FadeSlideIn(delay: NumberConstant.animStaggerStep * 2, child: _buildSearchField(),),
                       ],
                     ),
                   ),
@@ -67,11 +71,11 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: .start,
                         children: [
-                          _buildCategoryChips(context),
-                          //sectionHeader(recommendation)
-                          _buildRecommendationList(context),
-                          //sectionHeader(recipesOfTheWeek)
-                          _buildRecipeOfTheWeek(context),
+                          FadeSlideIn(delay: NumberConstant.animStaggerStep * 3, child: _buildCategoryChips(context),),
+                          FadeSlideIn(delay: NumberConstant.animStaggerStep * 4, child: _buildSectionHeader(StringConst.recommendation),),
+                          FadeSlideIn(delay: NumberConstant.animStaggerStep * 4, child: _buildRecommendationList(context),),
+                          FadeSlideIn(delay: NumberConstant.animStaggerStep * 5, child: _buildSectionHeader(StringConst.recipeOfTheWeek),),
+                          FadeSlideIn(delay: NumberConstant.animStaggerStep * 5, child: _buildRecipeOfTheWeek(context),),
                         ],
                       ),
                     ),
@@ -92,22 +96,17 @@ class HomeScreen extends StatelessWidget {
         spacing: 13,
         crossAxisAlignment: .start,
         children: [
-          ClipOval(
-
-            //avatarImg, avatarSize, .fit.cover
-            child: const SizedBox()
-          ),
+          ClipOval(child: Image.asset(AssetRes.avatarImg, height: NumberConstant.avatarSize, fit: .cover,),),
           Expanded(
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                //goodMorning, greetingLabel
-                //userName, userName
+                Text(StringConst.goodMorning, style: AppTextStyles.greetingLabel,),
+                Text(StringConst.userName, style: AppTextStyles.userName,),
               ],
             ),
           ),
-
-          // CircularIconButton(iconPath: AssetRes.icDrawer,),
+          CircularIconButton(iconPath: AssetRes.icDrawer,),
         ],
       ),
     );
@@ -118,8 +117,8 @@ class HomeScreen extends StatelessWidget {
       height: NumberConstant.searchFieldHeight,
       padding: .symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        // color: AppColors.whiteColor,
-        // borderRadius: .circular(NumberConstant.searchRadius),
+        color: AppColors.whiteColor,
+        borderRadius: .circular(NumberConstant.searchRadius),
       ),
       child: Row(
         spacing: 16,
@@ -131,13 +130,13 @@ class HomeScreen extends StatelessWidget {
               decoration: InputDecoration(
                 isDense: true,
                 border: .none,
-                hintText: '',
+                hintText: StringConst.searchHint,
                 hintStyle: AppTextStyles.searchPlaceholder,
                 contentPadding: .zero,
               ),
             ),
           ),
-          //icSearch
+          SvgPicture.asset(AssetRes.icSearch,),
         ],
       ),
     );
@@ -169,28 +168,28 @@ class HomeScreen extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: onTap,
-      child: DecoratedBox(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: NumberConstant.animFast),
+        curve: Curves.easeOutCubic,
+        height: NumberConstant.categoryChipHeight,
+        padding: .symmetric(horizontal: 13),
         decoration: BoxDecoration(
-          // color: isSelected ? AppColors.primaryGreenColor : AppColors.whiteColor,
-          // borderRadius: .circular(NumberConstant.categoryChipRadius),
-          // border: .all(color: isSelected ? AppColors.primaryGreenColor : AppColors.borderColor,),
+          color: isSelected ? AppColors.primaryGreenColor : AppColors.whiteColor,
+          borderRadius: .circular(NumberConstant.categoryChipRadius),
+          border: .all(color: isSelected ? AppColors.primaryGreenColor : AppColors.borderColor,),
         ),
-        child: SizedBox(
-          height: NumberConstant.categoryChipHeight,
-          child: Padding(
-            padding: .symmetric(horizontal: 13),
-            child: Row(
-              mainAxisSize: .min,
-              spacing: 8,
-              children: [
-                if (!category.isSeeAll)
-                  //category.emoji, categoryEmojiSize
-                  const SizedBox(),
-                //category.name, isSelected ? categoryChipSelected : categoryChip
-
-              ],
+        child: Row(
+          mainAxisSize: .min,
+          spacing: 8,
+          children: [
+            if (!category.isSeeAll) Text(category.emoji, style: TextStyle(fontSize: NumberConstant.categoryEmojiSize),),
+            AnimatedDefaultTextStyle(
+              duration: const Duration(milliseconds: NumberConstant.animFast),
+              curve: Curves.easeOutCubic,
+              style: isSelected ? AppTextStyles.categoryChipSelected : AppTextStyles.categoryChip,
+              child: Text(category.name,),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -209,19 +208,33 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildRecommendationList(BuildContext context) {
-    final recipes = _recommendationsFor(context.watch<HomeProvider>().selectedCategoryIndex);
+    final categoryIndex = context.watch<HomeProvider>().selectedCategoryIndex;
+    final recipes = _recommendationsFor(categoryIndex);
 
     return Padding(
       padding: .only(top: 13),
       child: SizedBox(
         height: NumberConstant.recipeCardImageHeight + 49,
-        child: ListView.separated(
-          scrollDirection: .horizontal,
-          itemCount: recipes.length,
-          separatorBuilder: (context, index) => const SizedBox(width: NumberConstant.recipeCardGap),
-          itemBuilder: (context, index) => RecipeCard(
-            recipe: recipes[index],
-            onTap: () => context.push(NamedRoutes.recipeDetailPath(recipes[index].id)),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: NumberConstant.animMedium),
+          switchInCurve: Curves.easeOutCubic,
+          switchOutCurve: Curves.easeInCubic,
+          transitionBuilder: (child, animation) => FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position: Tween(begin: const Offset(0.04, 0), end: Offset.zero).animate(animation),
+              child: child,
+            ),
+          ),
+          child: ListView.separated(
+            key: ValueKey(categoryIndex),
+            scrollDirection: .horizontal,
+            itemCount: recipes.length,
+            separatorBuilder: (context, index) => const SizedBox(width: NumberConstant.recipeCardGap),
+            itemBuilder: (context, index) => RecipeCard(
+              recipe: recipes[index],
+              onTap: () => context.push(NamedRoutes.recipeDetailPath(recipes[index].id)),
+            ),
           ),
         ),
       ),
@@ -255,4 +268,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
