@@ -46,4 +46,7 @@ class NumberConstant {
   static const animSlow = 350;
   static const animStaggerStep = 40;
   static const animSlideOffset = 16.0;
+  static const likeHeartSize = 72.0;
+  static const likeHeartTopOffset = 56.0;
+  static const likeAnimDuration = 800;
 }

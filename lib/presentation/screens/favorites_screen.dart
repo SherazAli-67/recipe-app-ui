@@ -10,6 +10,7 @@ import 'package:recipe_app_ui/core/app_textstyles.dart';
 import 'package:recipe_app_ui/core/asset_res.dart';
 import 'package:recipe_app_ui/core/models/recipe_model.dart';
 import 'package:recipe_app_ui/presentation/widgets/circular_icon_button.dart';
+import 'package:recipe_app_ui/presentation/widgets/fade_slide_in.dart';
 import 'package:recipe_app_ui/presentation/widgets/recipe_card.dart';
 import 'package:recipe_app_ui/providers/favorites_provider.dart';
 import 'package:recipe_app_ui/routing/router.dart';
@@ -28,24 +29,37 @@ class FavoritesScreen extends StatelessWidget {
           padding: .symmetric(horizontal: NumberConstant.horizontalPadding),
           child: Column(
             children: [
-              _buildTopNav(context),
+              FadeSlideIn(delay: 0, child: _buildTopNav(context),),
               Expanded(
                 child: ListView(
                   padding: .only(top: 5, bottom: 16),
-                  children: AppData.favoriteCategories.map((category) {
+                  children: AppData.favoriteCategories.asMap().entries.map((entry) {
+                    final category = entry.value;
                     final isExpanded = provider.isExpanded(category);
                     final favorites = AppData.favoriteRecipesByCategory(category);
-                    return Column(
-                      crossAxisAlignment: .start,
-                      children: [
-                        _buildAccordionRow(
-                          title: category,
-                          count: favorites.length,
-                          isExpanded: isExpanded,
-                          onTap: () => provider.toggleCategory(category),
-                        ),
-                        if (isExpanded) _buildFavoritesGrid(context, provider, favorites),
-                      ],
+                    return FadeSlideIn(
+                      delay: NumberConstant.animStaggerStep * (entry.key + 1),
+                      child: Column(
+                        crossAxisAlignment: .start,
+                        children: [
+                          _buildAccordionRow(
+                            title: category,
+                            count: favorites.length,
+                            isExpanded: isExpanded,
+                            onTap: () => provider.toggleCategory(category),
+                          ),
+                          AnimatedSize(
+                            duration: const Duration(milliseconds: NumberConstant.animMedium),
+                            curve: Curves.easeOutCubic,
+                            alignment: .topCenter,
+                            child: ClipRect(
+                              child: isExpanded
+                                  ? _buildFavoritesGrid(context, provider, favorites)
+                                  : const SizedBox(width: double.infinity),
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   }).toList(),
                 ),
@@ -91,7 +105,9 @@ class FavoritesScreen extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border(bottom: BorderSide(color: AppColors.borderColor)),
         ),
-        child: SizedBox(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: NumberConstant.animFast),
+          curve: Curves.easeOutCubic,
           height: isExpanded ? 53 : NumberConstant.accordionRowHeight,
           child: Row(
             children: [
@@ -103,7 +119,7 @@ class FavoritesScreen extends StatelessWidget {
               const Spacer(),
               AnimatedRotation(
                 turns: isExpanded ? 0.25 : 0,
-                duration: const Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: NumberConstant.animFast),
                 child: SvgPicture.asset(AssetRes.icChevronRight,),
               ),
             ],
@@ -124,32 +140,42 @@ class FavoritesScreen extends StatelessWidget {
 
     return Padding(
       padding: .only(top: 17, bottom: 8),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: favorites.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: NumberConstant.favoriteCardGap,
-          mainAxisSpacing: NumberConstant.favoriteGridRowGap,
-          childAspectRatio: NumberConstant.favoriteCardWidth /
-              (NumberConstant.favoriteCardImageHeight + 50),
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: NumberConstant.animMedium),
+        switchInCurve: Curves.easeOutCubic,
+        switchOutCurve: Curves.easeInCubic,
+        transitionBuilder: (child, animation) => FadeTransition(opacity: animation, child: child,),
+        child: GridView.builder(
+          key: ValueKey(favorites.map((recipe) => recipe.id).join(',')),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: favorites.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: NumberConstant.favoriteCardGap,
+            mainAxisSpacing: NumberConstant.favoriteGridRowGap,
+            childAspectRatio: NumberConstant.favoriteCardWidth /
+                (NumberConstant.favoriteCardImageHeight + 50),
+          ),
+          itemBuilder: (context, index) {
+            final recipe = favorites[index];
+            return FadeSlideIn(
+              delay: index * NumberConstant.animStaggerStep,
+              child: LayoutBuilder(
+                builder: (context, constraints) => RecipeCard(
+                  recipe: recipe,
+                  width: constraints.maxWidth,
+                  imageHeight: NumberConstant.favoriteCardImageHeight,
+                  showTimeBadge: false,
+                  showFavoriteButton: true,
+                  useSmallTitle: true,
+                  onTap: () => context.push(NamedRoutes.recipeDetailPath(recipe.id)),
+                  onFavoriteTap: () => provider.toggleFavorite(recipe.id),
+                ),
+              ),
+            );
+          },
         ),
-        itemBuilder: (context, index) {
-          final recipe = favorites[index];
-          return LayoutBuilder(
-            builder: (context, constraints) => RecipeCard(
-              recipe: recipe,
-              width: constraints.maxWidth,
-              imageHeight: NumberConstant.favoriteCardImageHeight,
-              showTimeBadge: false,
-              showFavoriteButton: true,
-              useSmallTitle: true,
-              onTap: () => context.push(NamedRoutes.recipeDetailPath(recipe.id)),
-              onFavoriteTap: () => provider.toggleFavorite(recipe.id),
-            ),
-          );
-        },
       ),
     );
   }

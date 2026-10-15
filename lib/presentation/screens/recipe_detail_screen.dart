@@ -39,7 +39,7 @@ class RecipeDetailScreen extends StatelessWidget {
                       children: [
                         FadeSlideIn(delay: NumberConstant.animStaggerStep, child: _buildTitleRow(),),
                         FadeSlideIn(delay: NumberConstant.animStaggerStep * 2, child: _buildMetaRow(),),
-                        _buildHeroImage(),
+                        _buildHeroImage(provider),
                         FadeSlideIn(delay: NumberConstant.animStaggerStep * 3, child: _buildDescription(provider),),
                         FadeSlideIn(
                           delay: NumberConstant.animStaggerStep * 4,
@@ -169,51 +169,82 @@ class RecipeDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeroImage() {
+  Widget _buildHeroImage(RecipeDetailProvider provider) {
     return Padding(
       padding: .only(top: 17),
-      child: Hero(
-        tag: 'recipe-image-${recipe.id}',
-        child: ClipRRect(
-          borderRadius: .circular(NumberConstant.detailHeroRadius),
-          child: SizedBox(
-            height: NumberConstant.detailHeroHeight,
-            width: double.infinity,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: CachedNetworkImage(
-                    imageUrl: recipe.imagePath,
-                    fit: .cover,
-                    width: double.infinity,
-                    height: NumberConstant.detailHeroHeight,
+      child: GestureDetector(
+        onDoubleTap: () {
+          recipe.isFavorite = true;
+          provider.triggerLikeAnimation();
+        },
+        child: Hero(
+          tag: 'recipe-image-${recipe.id}',
+          child: ClipRRect(
+            borderRadius: .circular(NumberConstant.detailHeroRadius),
+            child: SizedBox(
+              height: NumberConstant.detailHeroHeight,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: CachedNetworkImage(
+                      imageUrl: recipe.imagePath,
+                      fit: .cover,
+                      width: double.infinity,
+                      height: NumberConstant.detailHeroHeight,
+                    ),
                   ),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 16,
-                  child: Center(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: AppColors.imageBadgeColor,
-                        borderRadius: .circular(NumberConstant.imageBadgeRadius),
-                      ),
-                      child: Padding(
-                        padding: .symmetric(
-                          horizontal: NumberConstant.imageBadgeHorizontalPadding,
-                          vertical: NumberConstant.imageBadgeVerticalPadding,
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 16,
+                    child: Center(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: AppColors.imageBadgeColor,
+                          borderRadius: .circular(NumberConstant.imageBadgeRadius),
                         ),
-                        child: Text(StringConst.imagePageIndicator, style: AppTextStyles.imageBadge,),
+                        child: Padding(
+                          padding: .symmetric(
+                            horizontal: NumberConstant.imageBadgeHorizontalPadding,
+                            vertical: NumberConstant.imageBadgeVerticalPadding,
+                          ),
+                          child: Text(StringConst.imagePageIndicator, style: AppTextStyles.imageBadge,),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  if (provider.likeAnimationId > 0)
+                    Positioned(
+                      top: NumberConstant.likeHeartTopOffset,
+                      left: 0,
+                      right: 0,
+                      child: Center(child: _buildLikeHeartBurst(key: ValueKey(provider.likeAnimationId)),),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildLikeHeartBurst({required Key key}) {
+    return TweenAnimationBuilder<double>(
+      key: key,
+      tween: Tween(begin: 0, end: 1),
+      duration: const Duration(milliseconds: NumberConstant.likeAnimDuration),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        final scale = value < 0.35 ? Curves.easeOutBack.transform(value / 0.35) : 1.0;
+        final opacity = value < 0.55 ? 1.0 : (1.0 - (value - 0.55) / 0.45).clamp(0.0, 1.0);
+        return Opacity(
+          opacity: opacity,
+          child: Transform.scale(scale: scale, child: child,),
+        );
+      },
+      child: SvgPicture.asset(AssetRes.icHeart, width: NumberConstant.likeHeartSize, height: NumberConstant.likeHeartSize,),
     );
   }
 

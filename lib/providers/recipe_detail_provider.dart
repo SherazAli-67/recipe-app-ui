@@ -4,6 +4,7 @@ class RecipeDetailProvider extends ChangeNotifier {
   bool isDescriptionExpanded = false;
   bool isIngredientsExpanded = false;
   bool isDirectionsExpanded = true;
+  int likeAnimationId = 0;
 
   void toggleDescription() {
     isDescriptionExpanded = !isDescriptionExpanded;
@@ -17,6 +18,11 @@ class RecipeDetailProvider extends ChangeNotifier {
 
   void toggleDirections() {
     isDirectionsExpanded = !isDirectionsExpanded;
+    notifyListeners();
+  }
+
+  void triggerLikeAnimation() {
+    likeAnimationId++;
     notifyListeners();
   }
 }
