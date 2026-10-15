@@ -10,6 +10,7 @@ import 'package:recipe_app_ui/core/app_textstyles.dart';
 import 'package:recipe_app_ui/core/asset_res.dart';
 import 'package:recipe_app_ui/core/models/recipe_model.dart';
 import 'package:recipe_app_ui/presentation/widgets/circular_icon_button.dart';
+import 'package:recipe_app_ui/presentation/widgets/fade_slide_in.dart';
 import 'package:recipe_app_ui/providers/recipe_detail_provider.dart';
 
 class RecipeDetailScreen extends StatelessWidget {
@@ -31,29 +32,35 @@ class RecipeDetailScreen extends StatelessWidget {
               child: Column(
                 spacing: 20,
                 children: [
-                  _buildTopNav(context),
+                  FadeSlideIn(delay: 0, child: _buildTopNav(context),),
                   Expanded(
                     child: ListView(
                       padding: .only(bottom: 100),
                       children: [
-                        _buildTitleRow(),
-                        _buildMetaRow(),
+                        FadeSlideIn(delay: NumberConstant.animStaggerStep, child: _buildTitleRow(),),
+                        FadeSlideIn(delay: NumberConstant.animStaggerStep * 2, child: _buildMetaRow(),),
                         _buildHeroImage(),
-                        _buildDescription(provider),
-                        Padding(
-                          padding: .only(top: NumberConstant.detailAccordionTopPadding),
-                          child: _buildAccordion(
-                            title: StringConst.ingredients,
-                            isExpanded: provider.isIngredientsExpanded,
-                            onTap: provider.toggleIngredients,
-                            child: _buildIngredientsList(),
+                        FadeSlideIn(delay: NumberConstant.animStaggerStep * 3, child: _buildDescription(provider),),
+                        FadeSlideIn(
+                          delay: NumberConstant.animStaggerStep * 4,
+                          child: Padding(
+                            padding: .only(top: NumberConstant.detailAccordionTopPadding),
+                            child: _buildAccordion(
+                              title: StringConst.ingredients,
+                              isExpanded: provider.isIngredientsExpanded,
+                              onTap: provider.toggleIngredients,
+                              child: _buildIngredientsList(),
+                            ),
                           ),
                         ),
-                        _buildAccordion(
-                          title: StringConst.directions,
-                          isExpanded: provider.isDirectionsExpanded,
-                          onTap: provider.toggleDirections,
-                          child: Text(recipe.directions, style: AppTextStyles.accordionBody,),
+                        FadeSlideIn(
+                          delay: NumberConstant.animStaggerStep * 4,
+                          child: _buildAccordion(
+                            title: StringConst.directions,
+                            isExpanded: provider.isDirectionsExpanded,
+                            onTap: provider.toggleDirections,
+                            child: Text(recipe.directions, style: AppTextStyles.accordionBody,),
+                          ),
                         ),
                       ],
                     ),
@@ -86,7 +93,13 @@ class RecipeDetailScreen extends StatelessWidget {
               left: 0,
               right: 0,
               bottom: NumberConstant.watchVideoBottomOffset,
-              child: Center(child: _buildWatchVideoButton()),
+              child: Center(
+                child: FadeSlideIn(
+                  delay: NumberConstant.animStaggerStep * 5,
+                  offsetY: NumberConstant.animSlideOffset * 1.5,
+                  child: _buildWatchVideoButton(),
+                ),
+              ),
             ),
           ],
         ),
@@ -159,42 +172,45 @@ class RecipeDetailScreen extends StatelessWidget {
   Widget _buildHeroImage() {
     return Padding(
       padding: .only(top: 17),
-      child: ClipRRect(
-        borderRadius: .circular(NumberConstant.detailHeroRadius),
-        child: SizedBox(
-          height: NumberConstant.detailHeroHeight,
-          width: double.infinity,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: CachedNetworkImage(imageUrl:
-                  recipe.imagePath,
-                  fit: .cover,
-                  width: double.infinity,
-                  height: NumberConstant.detailHeroHeight,
+      child: Hero(
+        tag: 'recipe-image-${recipe.id}',
+        child: ClipRRect(
+          borderRadius: .circular(NumberConstant.detailHeroRadius),
+          child: SizedBox(
+            height: NumberConstant.detailHeroHeight,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: CachedNetworkImage(
+                    imageUrl: recipe.imagePath,
+                    fit: .cover,
+                    width: double.infinity,
+                    height: NumberConstant.detailHeroHeight,
+                  ),
                 ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 16,
-                child: Center(
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: AppColors.imageBadgeColor,
-                      borderRadius: .circular(NumberConstant.imageBadgeRadius),
-                    ),
-                    child: Padding(
-                      padding: .symmetric(
-                        horizontal: NumberConstant.imageBadgeHorizontalPadding,
-                        vertical: NumberConstant.imageBadgeVerticalPadding,
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 16,
+                  child: Center(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: AppColors.imageBadgeColor,
+                        borderRadius: .circular(NumberConstant.imageBadgeRadius),
                       ),
-                      child: Text(StringConst.imagePageIndicator, style: AppTextStyles.imageBadge,),
+                      child: Padding(
+                        padding: .symmetric(
+                          horizontal: NumberConstant.imageBadgeHorizontalPadding,
+                          vertical: NumberConstant.imageBadgeVerticalPadding,
+                        ),
+                        child: Text(StringConst.imagePageIndicator, style: AppTextStyles.imageBadge,),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -217,16 +233,21 @@ class RecipeDetailScreen extends StatelessWidget {
           padding: .only(top: 11),
           child: GestureDetector(
             onTap: provider.toggleDescription,
-            child: provider.isDescriptionExpanded
-                ? Text(recipe.description, style: AppTextStyles.descriptionBody,)
-                : Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(text: preview, style: AppTextStyles.descriptionBody),
-                        TextSpan(text: StringConst.showMore, style: AppTextStyles.showMore),
-                      ],
+            child: AnimatedSize(
+              duration: const Duration(milliseconds: NumberConstant.animMedium),
+              curve: Curves.easeOutCubic,
+              alignment: .topLeft,
+              child: provider.isDescriptionExpanded
+                  ? Text(recipe.description, style: AppTextStyles.descriptionBody,)
+                  : Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(text: preview, style: AppTextStyles.descriptionBody),
+                          TextSpan(text: StringConst.showMore, style: AppTextStyles.showMore),
+                        ],
+                      ),
                     ),
-                  ),
+            ),
           ),
         ),
       ],
@@ -266,18 +287,26 @@ class RecipeDetailScreen extends StatelessWidget {
                   Expanded(child: Text(title, style: AppTextStyles.accordionTitle,),),
                   AnimatedRotation(
                     turns: isExpanded ? 0.5 : 0,
-                    duration: const Duration(milliseconds: 200),
+                    duration: const Duration(milliseconds: NumberConstant.animFast),
                     child: SvgPicture.asset(AssetRes.icChevronDown,),
                   ),
                 ],
               ),
             ),
           ),
-          if (isExpanded)
-            Padding(
-              padding: .only(bottom: 10),
-              child: child,
+          AnimatedSize(
+            duration: const Duration(milliseconds: NumberConstant.animMedium),
+            curve: Curves.easeOutCubic,
+            alignment: .topCenter,
+            child: ClipRect(
+              child: isExpanded
+                  ? Padding(
+                      padding: .only(bottom: 10),
+                      child: child,
+                    )
+                  : const SizedBox(width: double.infinity),
             ),
+          ),
         ],
       ),
     );

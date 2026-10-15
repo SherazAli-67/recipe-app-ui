@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_app_ui/constants/number_constant.dart';
 import 'package:recipe_app_ui/constants/string_const.dart';
 import 'package:recipe_app_ui/core/app_data.dart';
 import 'package:recipe_app_ui/core/app_textstyles.dart';
@@ -62,16 +63,32 @@ GoRouter router = GoRouter(
     ),
     GoRoute(
       path: NamedRoutes.recipeDetail.routeName,
-      builder: (context, state) {
+      pageBuilder: (context, state) {
         final recipe = AppData.recipeById(state.pathParameters['id'] ?? '');
-        if (recipe == null) {
-          return Scaffold(
-            body: Center(child: Text(StringConst.recipeNotFound, style: AppTextStyles.topNavTitle,),),
-          );
-        }
-        return ChangeNotifierProvider(
-          create: (_) => RecipeDetailProvider(),
-          child: RecipeDetailScreen(recipe: recipe),
+        final child = recipe == null
+            ? Scaffold(
+                body: Center(child: Text(StringConst.recipeNotFound, style: AppTextStyles.topNavTitle,),),
+              )
+            : ChangeNotifierProvider(
+                create: (_) => RecipeDetailProvider(),
+                child: RecipeDetailScreen(recipe: recipe),
+              );
+
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: child,
+          transitionDuration: const Duration(milliseconds: NumberConstant.animMedium),
+          reverseTransitionDuration: const Duration(milliseconds: NumberConstant.animFast),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curved = CurvedAnimation(parent: animation, curve: Curves.easeOutCubic);
+            return FadeTransition(
+              opacity: curved,
+              child: SlideTransition(
+                position: Tween(begin: const Offset(0, 0.04), end: Offset.zero).animate(curved),
+                child: child,
+              ),
+            );
+          },
         );
       },
     ),
