@@ -45,7 +45,7 @@ class RecipeCard extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: Image.asset(
+                      child: Image.network(
                         recipe.imagePath,
                         fit: .cover,
                         width: width,

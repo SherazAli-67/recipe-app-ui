@@ -16,7 +16,7 @@ class StringConst {
   static const salad = 'Salad';
   static const mainDish = 'Main Dish';
   static const recommendation = 'Recommendation';
-  static const recipeOfTheWeek = 'Recipe of The Week';
+  static const recipeOfTheWeek = 'Recipes of The Week';
   static const home = 'Home';
   static const search = 'Search';
   static const saved = 'Saved';

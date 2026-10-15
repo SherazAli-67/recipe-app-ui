@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                           _buildSectionHeader(StringConst.recommendation),
                           _buildRecommendationList(context),
                           _buildSectionHeader(StringConst.recipeOfTheWeek),
-                          _buildRecipeOfTheWeek(),
+                          _buildRecipeOfTheWeek(context),
                         ],
                       ),
                     ),
@@ -241,35 +241,22 @@ class HomeScreen extends StatelessWidget {
     return filtered.isEmpty ? AppData.recommendations : filtered;
   }
 
-  Widget _buildRecipeOfTheWeek() {
+  Widget _buildRecipeOfTheWeek(BuildContext context) {
+    final recipes = AppData.recipesOfTheWeek;
+
     return Padding(
       padding: .only(top: 13, bottom: 24),
-      child: Row(
-        spacing: NumberConstant.weekImageGap,
-        children: [
-          Expanded(
-            flex: 198,
-            child: ClipRRect(
-              borderRadius: .circular(NumberConstant.recipeCardRadius),
-              child: Image.asset(
-                AssetRes.recipeWeekLeftImg,
-                height: NumberConstant.weekImageHeight,
-                fit: .cover,
-              ),
-            ),
+      child: SizedBox(
+        height: NumberConstant.recipeCardImageHeight + 49,
+        child: ListView.separated(
+          scrollDirection: .horizontal,
+          itemCount: recipes.length,
+          separatorBuilder: (context, index) => const SizedBox(width: NumberConstant.recipeCardGap),
+          itemBuilder: (context, index) => RecipeCard(
+            recipe: recipes[index],
+            onTap: () => context.push(NamedRoutes.recipeDetailPath(recipes[index].id)),
           ),
-          Expanded(
-            flex: 158,
-            child: ClipRRect(
-              borderRadius: .circular(NumberConstant.recipeCardRadius),
-              child: Image.asset(
-                AssetRes.recipeWeekRightImg,
-                height: NumberConstant.weekImageHeight,
-                fit: .cover,
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
