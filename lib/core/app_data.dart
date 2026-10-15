@@ -1,5 +1,4 @@
 import 'package:recipe_app_ui/constants/string_const.dart';
-import 'package:recipe_app_ui/core/asset_res.dart';
 import 'package:recipe_app_ui/core/models/category_model.dart';
 import 'package:recipe_app_ui/core/models/recipe_model.dart';
 
@@ -314,11 +313,6 @@ class AppData {
 
   static List<RecipeModel> get recommendations => recipes.take(3).toList();
 
-  static List<String> get recipeOfTheWeekImages => [
-        AssetRes.recipeWeekLeftImg,
-        AssetRes.recipeWeekRightImg,
-      ];
-
   static RecipeModel? recipeById(String id) {
     for (final recipe in [...recipes, ...recipesOfTheWeek]) {
       if (recipe.id == id) return recipe;
@@ -332,7 +326,4 @@ class AppData {
   static List<RecipeModel> favoriteRecipesByCategory(String category) => recipes
       .where((recipe) => recipe.isFavorite && recipe.category == category)
       .toList();
-
-  static int favoriteCountByCategory(String category) =>
-      favoriteRecipesByCategory(category).length;
 }

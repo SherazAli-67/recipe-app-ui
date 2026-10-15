@@ -1,6 +1,5 @@
 class NumberConstant {
   static const horizontalPadding = 24.0;
-  static const homeHeaderBottomPadding = 18.0;
   static const searchFieldHeight = 51.0;
   static const categoryChipHeight = 40.0;
   static const categoryChipRadius = 22.0;
@@ -15,12 +14,9 @@ class NumberConstant {
   static const favoriteCardGap = 12.0;
   static const favoriteGridRowGap = 16.0;
   static const favoriteAccordionCountGap = 10.0;
-  static const weekImageHeight = 124.0;
-  static const weekImageGap = 14.0;
   static const avatarSize = 44.0;
   static const circularButtonPadding = 12.5;
   static const favoriteHeartPadding = 7.0;
-  static const iconButtonPadding = 13.0;
   static const timeBadgeHorizontalPadding = 13.0;
   static const timeBadgeVerticalPadding = 7.0;
   static const bottomNavTopPadding = 16.0;
@@ -29,7 +25,6 @@ class NumberConstant {
   static const timeBadgeRadius = 18.0;
   static const primaryButtonHeight = 45.0;
   static const primaryButtonRadius = 28.0;
-  static const bottomNavHeight = 96.0;
   static const accordionRowHeight = 62.0;
   static const detailHeroHeight = 287.0;
   static const detailHeroRadius = 11.0;
@@ -45,6 +40,5 @@ class NumberConstant {
   static const watchVideoBottomOffset = 24.0;
   static const homeContentTopPadding = 20.0;
   static const categoryEmojiSize = 19.0;
-
   static const searchRadius = 99.0;
 }
