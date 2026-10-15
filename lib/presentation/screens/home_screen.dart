@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height * 0.38,
             child: DecoratedBox(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+              /*  gradient: LinearGradient(
                   begin: .topCenter,
                   end: .bottomCenter,
                   colors: [
@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                     AppColors.whiteColor,
                   ],
                   stops: const [0, 0.72, 1],
-                ),
+                ),*/
               ),
             ),
           ),
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                       spacing: 18,
                       children: [
                         _buildHeader(),
-                        _buildHeroTitle(),
+                        //${StringConst.heroTitleLine1}\n${StringConst.heroTitleLine2}, heroTitle
                         _buildSearchField(),
                       ],
                     ),
@@ -68,9 +68,9 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: .start,
                         children: [
                           _buildCategoryChips(context),
-                          _buildSectionHeader(StringConst.recommendation),
+                          //sectionHeader(recommendation)
                           _buildRecommendationList(context),
-                          _buildSectionHeader(StringConst.recipeOfTheWeek),
+                          //sectionHeader(recipesOfTheWeek)
                           _buildRecipeOfTheWeek(context),
                         ],
                       ),
@@ -93,32 +93,23 @@ class HomeScreen extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           ClipOval(
-            child: Image.asset(
-              AssetRes.avatarImg,
-              width: NumberConstant.avatarSize,
-              height: NumberConstant.avatarSize,
-              fit: .cover,
-            ),
+
+            //avatarImg, avatarSize, .fit.cover
+            child: const SizedBox()
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Text(StringConst.goodMorning, style: AppTextStyles.greetingLabel,),
-                Text(StringConst.userName, style: AppTextStyles.userName,),
+                //goodMorning, greetingLabel
+                //userName, userName
               ],
             ),
           ),
-          CircularIconButton(iconPath: AssetRes.icDrawer,),
+
+          // CircularIconButton(iconPath: AssetRes.icDrawer,),
         ],
       ),
-    );
-  }
-
-  Widget _buildHeroTitle() {
-    return Text(
-      '${StringConst.heroTitleLine1}\n${StringConst.heroTitleLine2}',
-      style: AppTextStyles.heroTitle,
     );
   }
 
@@ -127,8 +118,8 @@ class HomeScreen extends StatelessWidget {
       height: NumberConstant.searchFieldHeight,
       padding: .symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: .circular(NumberConstant.searchRadius),
+        // color: AppColors.whiteColor,
+        // borderRadius: .circular(NumberConstant.searchRadius),
       ),
       child: Row(
         spacing: 16,
@@ -140,13 +131,13 @@ class HomeScreen extends StatelessWidget {
               decoration: InputDecoration(
                 isDense: true,
                 border: .none,
-                hintText: StringConst.searchHint,
+                hintText: '',
                 hintStyle: AppTextStyles.searchPlaceholder,
                 contentPadding: .zero,
               ),
             ),
           ),
-          SvgPicture.asset(AssetRes.icSearch)
+          //icSearch
         ],
       ),
     );
@@ -180,11 +171,9 @@ class HomeScreen extends StatelessWidget {
       onTap: onTap,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryGreenColor : AppColors.whiteColor,
-          borderRadius: .circular(NumberConstant.categoryChipRadius),
-          border: .all(
-            color: isSelected ? AppColors.primaryGreenColor : AppColors.borderColor,
-          ),
+          // color: isSelected ? AppColors.primaryGreenColor : AppColors.whiteColor,
+          // borderRadius: .circular(NumberConstant.categoryChipRadius),
+          // border: .all(color: isSelected ? AppColors.primaryGreenColor : AppColors.borderColor,),
         ),
         child: SizedBox(
           height: NumberConstant.categoryChipHeight,
@@ -194,11 +183,11 @@ class HomeScreen extends StatelessWidget {
               mainAxisSize: .min,
               spacing: 8,
               children: [
-                if (!category.isSeeAll) Text(category.emoji, style: TextStyle(fontSize: NumberConstant.categoryEmojiSize),),
-                Text(
-                  category.name,
-                  style: isSelected ? AppTextStyles.categoryChipSelected : AppTextStyles.categoryChip,
-                ),
+                if (!category.isSeeAll)
+                  //category.emoji, categoryEmojiSize
+                  const SizedBox(),
+                //category.name, isSelected ? categoryChipSelected : categoryChip
+
               ],
             ),
           ),

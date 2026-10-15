@@ -2,7 +2,7 @@ class AssetRes {
   static const _imagesPath = 'assets/images/';
   static const _iconsPath = 'assets/icons/';
 
-  static const avatarImg = '${_imagesPath}avatar_img.png';
+  static const avatarImg = '${_imagesPath}avatar_img.jpeg';
 
   static const icDrawer = '${_iconsPath}ic_drawer.svg';
   static const icSearch = '${_iconsPath}ic_search.svg';
