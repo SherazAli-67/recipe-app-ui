@@ -66,6 +66,50 @@ class AppData {
       isFavorite: true,
     ),
     RecipeModel(
+      id: '10',
+      title: 'Chicken Salad',
+      description: 'This creamy chicken salad recipe is the best and a family favorite! I like to use leftover roast chicken or baked chicken breasts that have been sprinkled with basil or rosemary. Almonds and celery add a lovely crunch.',
+      imagePath: 'https://www.allrecipes.com/thmb/r66sEh0q3DDLRSWCOTQvahgBkF0=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/8499-Best-Chicken-Salad-DDMFS-3X4-11915-d36a5b98b1e041b3b48b62ecdfa6029e.jpg',
+      cookTime: '30 mins',
+      category: StringConst.salad,
+      rating: 4.5,
+      difficulty: 'Easy',
+      ingredients: [
+        'Firm tofu',
+        'Bell peppers',
+        'Olive oil',
+        'Soy sauce',
+        'Garlic',
+        'Black pepper',
+      ],
+      directions:
+      'Press and cube the tofu. Toss with oil, soy sauce, and garlic. Roast with peppers until golden and crisp on the edges. Serve warm over greens.',
+      isFavorite: true,
+    ),
+
+    RecipeModel(
+      id: '11',
+      title: 'Pasta Salad',
+      description: 'This pasta salad is nice and colorful, easy to make, and great for summer picnics or parties. The recipe was given to me by a dear friend many years ago, and I’ve been making it ever since!',
+      imagePath: 'https://www.allrecipes.com/thmb/1_ts__qPQ68QuzUO7Mlo4hBpq8A=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/14385-pasta-salad-DDMFS-4x3-28eb5dbe00624780b36cabfef15ca183.jpg',
+      cookTime: '30 mins',
+      category: StringConst.salad,
+      rating: 4.5,
+      difficulty: 'Easy',
+      ingredients: [
+        'Firm tofu',
+        'Bell peppers',
+        'Olive oil',
+        'Soy sauce',
+        'Garlic',
+        'Black pepper',
+      ],
+      directions:
+      'Press and cube the tofu. Toss with oil, soy sauce, and garlic. Roast with peppers until golden and crisp on the edges. Serve warm over greens.',
+      isFavorite: true,
+    ),
+
+    RecipeModel(
       id: '3',
       title: 'Harvest Pork Stew',
       description: 'A terrific autumn stew, butternut squash and apples add a hint of sweetness to the savory flavors. Make it on the stovetop or in a slow cooker. “The flavor of the butternut and the spices was amazing,” says reviewer chefcheri. “It’s a recipe you can add to or subtract from and make your own!”',
@@ -107,6 +151,50 @@ class AppData {
       directions:
           'To make Choco Macarons, start by sifting together almond flour, powdered sugar, and cocoa powder to ensure a smooth batter. In a separate bowl, whisk egg whites until foamy, then gradually add granulated sugar while beating until soft peaks form. Gently fold the dry ingredients into the meringue using a spatula until the batter flows like lava.',
       isFavorite: false,
+    ),
+
+    RecipeModel(
+      id: '12',
+      title: 'Pistachio Salad',
+      description: 'This pistachio salad is super simple to make with pistachio pudding mix, whipped topping, and marshmallows for a classic dessert. This recipe can be changed to suit your tastes by adding additional fruit or nuts.',
+      imagePath: 'https://www.allrecipes.com/thmb/KPkhpk_HsfdWUvvIJp8yuaSSV3w=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/14286-instant-pistachio-salad-VAT-Beauty-4x3-f8721cf68565423c9da53b25b499f3ec.jpg',
+      cookTime: '30 mins',
+      category: StringConst.salad,
+      rating: 4.5,
+      difficulty: 'Easy',
+      ingredients: [
+        'Firm tofu',
+        'Bell peppers',
+        'Olive oil',
+        'Soy sauce',
+        'Garlic',
+        'Black pepper',
+      ],
+      directions:
+      'Press and cube the tofu. Toss with oil, soy sauce, and garlic. Roast with peppers until golden and crisp on the edges. Serve warm over greens.',
+      isFavorite: true,
+    ),
+
+    RecipeModel(
+      id: '13',
+      title: 'Caprese Salad with Balsamic Reduction',
+      description: 'This caprese salad with tomatoes, fresh mozzarella, and basil is drizzled with a sweet balsamic reduction and olive oil. Easy, impressive, and delicious!',
+      imagePath: 'https://www.allrecipes.com/thmb/knrz94hz3kacjTPveyvpqUxKq8w=/282x188/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AR-228126-caprese-salad-with-balsamic-reduction-ddmfs-2644-4x3-f32ac2b2fb9d4234884a752490fb015b.jpg',
+      cookTime: '30 mins',
+      category: StringConst.salad,
+      rating: 4.5,
+      difficulty: 'Easy',
+      ingredients: [
+        'Firm tofu',
+        'Bell peppers',
+        'Olive oil',
+        'Soy sauce',
+        'Garlic',
+        'Black pepper',
+      ],
+      directions:
+      'Press and cube the tofu. Toss with oil, soy sauce, and garlic. Roast with peppers until golden and crisp on the edges. Serve warm over greens.',
+      isFavorite: true,
     ),
     RecipeModel(
       id: '5',

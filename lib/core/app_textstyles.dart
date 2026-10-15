@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app_ui/core/app_colors.dart';
+import '../constants/string_const.dart';
 
 class AppTextStyles {
   static const greetingLabel = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 14,
     height: 21 / 14,
@@ -12,7 +13,7 @@ class AppTextStyles {
   );
 
   static const userName = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w500,
     fontSize: 20,
     height: 30 / 20,
@@ -21,7 +22,7 @@ class AppTextStyles {
   );
 
   static const heroTitle = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w600,
     fontSize: 26,
     height: 37.96 / 26,
@@ -30,7 +31,7 @@ class AppTextStyles {
   );
 
   static const searchPlaceholder = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     letterSpacing: -0.0762,
@@ -38,7 +39,7 @@ class AppTextStyles {
   );
 
   static const categoryChip = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 19.5 / 13,
@@ -47,7 +48,7 @@ class AppTextStyles {
   );
 
   static const categoryChipSelected = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 19.5 / 13,
@@ -56,7 +57,7 @@ class AppTextStyles {
   );
 
   static const sectionTitle = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w600,
     fontSize: 18,
     height: 27 / 18,
@@ -65,7 +66,7 @@ class AppTextStyles {
   );
 
   static const seeAll = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 19.5 / 13,
@@ -74,7 +75,7 @@ class AppTextStyles {
   );
 
   static const recipeCardTitle = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w700,
     fontSize: 15,
     height: 20 / 15,
@@ -83,7 +84,7 @@ class AppTextStyles {
   );
 
   static const recipeCardTitleSmall = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w700,
     fontSize: 14,
     height: 20 / 14,
@@ -92,7 +93,7 @@ class AppTextStyles {
   );
 
   static const recipeCardDescription = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 12,
     height: 20 / 12,
@@ -100,7 +101,7 @@ class AppTextStyles {
   );
 
   static const timeBadge = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 12,
     height: 18 / 12,
@@ -108,7 +109,7 @@ class AppTextStyles {
   );
 
   static const bottomNavLabel = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 12,
     height: 18 / 12,
@@ -116,7 +117,7 @@ class AppTextStyles {
   );
 
   static const bottomNavLabelActive = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 12,
     height: 18 / 12,
@@ -124,7 +125,7 @@ class AppTextStyles {
   );
 
   static const topNavTitle = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w500,
     fontSize: 20,
     height: 30 / 20,
@@ -133,7 +134,7 @@ class AppTextStyles {
   );
 
   static const detailTitle = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w700,
     fontSize: 25,
     height: 34 / 25,
@@ -142,7 +143,7 @@ class AppTextStyles {
   );
 
   static const rating = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w700,
     fontSize: 12,
     height: 18 / 12,
@@ -150,7 +151,7 @@ class AppTextStyles {
   );
 
   static const metaLabel = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 19.5 / 13,
@@ -159,7 +160,7 @@ class AppTextStyles {
   );
 
   static const descriptionHeading = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 18,
     height: 27 / 18,
@@ -168,7 +169,7 @@ class AppTextStyles {
   );
 
   static const descriptionBody = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 20 / 13,
@@ -177,7 +178,7 @@ class AppTextStyles {
   );
 
   static const showMore = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w700,
     fontSize: 13,
     height: 20 / 13,
@@ -186,7 +187,7 @@ class AppTextStyles {
   );
 
   static const accordionTitle = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w500,
     fontSize: 18,
     height: 27 / 18,
@@ -195,7 +196,7 @@ class AppTextStyles {
   );
 
   static const accordionBody = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 21 / 13,
@@ -204,7 +205,7 @@ class AppTextStyles {
   );
 
   static const accordionCount = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 19.5 / 13,
@@ -213,7 +214,7 @@ class AppTextStyles {
   );
 
   static const primaryButton = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 16,
     height: 24 / 16,
@@ -222,7 +223,7 @@ class AppTextStyles {
   );
 
   static const imageBadge = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: StringConst.appFontFamily,
     fontWeight: .w400,
     fontSize: 13,
     height: 19.5 / 13,

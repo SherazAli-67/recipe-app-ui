@@ -14,8 +14,6 @@ class NumberConstant {
   static const favoriteCardImageHeight = 199.0;
   static const favoriteCardGap = 12.0;
   static const favoriteGridRowGap = 16.0;
-  static const favoriteGridHeight = 504.0;
-  static const favoriteSeeAllOverlayHeight = 205.0;
   static const favoriteAccordionCountGap = 10.0;
   static const weekImageHeight = 124.0;
   static const weekImageGap = 14.0;
@@ -47,4 +45,6 @@ class NumberConstant {
   static const watchVideoBottomOffset = 24.0;
   static const homeContentTopPadding = 20.0;
   static const categoryEmojiSize = 19.0;
+
+  static const searchRadius = 99.0;
 }

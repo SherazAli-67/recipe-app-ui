@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:recipe_app_ui/constants/number_constant.dart';
@@ -37,16 +38,15 @@ class RecipeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .start,
           children: [
-            ClipRRect(
-              borderRadius: .circular(NumberConstant.recipeCardRadius),
-              child: SizedBox(
-                width: width,
-                height: imageHeight,
+            Expanded(
+              child: ClipRRect(
+                borderRadius: .circular(NumberConstant.recipeCardRadius),
                 child: Stack(
+                  fit: .expand,
                   children: [
                     Positioned.fill(
-                      child: Image.network(
-                        recipe.imagePath,
+                      child: CachedNetworkImage(
+                        imageUrl: recipe.imagePath,
                         fit: .cover,
                         width: width,
                         height: imageHeight,

@@ -123,26 +123,31 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildSearchField() {
-    return DecoratedBox(
+    return Container(
+      height: NumberConstant.searchFieldHeight,
+      padding: .symmetric(horizontal: 20),
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
-        border: Border(bottom: BorderSide(color: AppColors.searchBorderColor)),
+        borderRadius: .circular(NumberConstant.searchRadius),
       ),
-      child: SizedBox(
-        height: NumberConstant.searchFieldHeight,
-        child: Padding(
-          padding: .symmetric(horizontal: 14),
-          child: Row(
-            spacing: 14,
-            children: [
-              SvgPicture.asset(AssetRes.icSearch,),
-              Expanded(
-                child: Text(StringConst.searchHint, style: AppTextStyles.searchPlaceholder,),
+      child: Row(
+        spacing: 16,
+        children: [
+          Expanded(
+            child: TextField(
+              style: AppTextStyles.searchPlaceholder,
+              cursorColor: AppColors.primaryGreenColor,
+              decoration: InputDecoration(
+                isDense: true,
+                border: .none,
+                hintText: StringConst.searchHint,
+                hintStyle: AppTextStyles.searchPlaceholder,
+                contentPadding: .zero,
               ),
-              SvgPicture.asset(AssetRes.icFilter,),
-            ],
+            ),
           ),
-        ),
+          SvgPicture.asset(AssetRes.icSearch)
+        ],
       ),
     );
   }

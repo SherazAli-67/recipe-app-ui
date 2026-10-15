@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: StringConst.appTitle,
       theme: ThemeData(
         brightness: .light,
-        fontFamily: 'Inter',
+        fontFamily: StringConst.appFontFamily,
         scaffoldBackgroundColor: AppColors.whiteColor,
         colorScheme: .light(
           primary: AppColors.primaryGreenColor,

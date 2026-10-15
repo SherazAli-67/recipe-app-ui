@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +29,7 @@ class RecipeDetailScreen extends StatelessWidget {
             Padding(
               padding: .symmetric(horizontal: NumberConstant.horizontalPadding),
               child: Column(
+                spacing: 20,
                 children: [
                   _buildTopNav(context),
                   Expanded(
@@ -165,7 +167,7 @@ class RecipeDetailScreen extends StatelessWidget {
           child: Stack(
             children: [
               Positioned.fill(
-                child: Image.asset(
+                child: CachedNetworkImage(imageUrl:
                   recipe.imagePath,
                   fit: .cover,
                   width: double.infinity,

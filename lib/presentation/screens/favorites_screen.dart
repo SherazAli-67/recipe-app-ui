@@ -123,83 +123,33 @@ class FavoritesScreen extends StatelessWidget {
     }
 
     return Padding(
-      padding: .only(top: 17),
-      child: SizedBox(
-        height: NumberConstant.favoriteGridHeight,
-        child: Stack(
-          children: [
-            GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: favorites.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: NumberConstant.favoriteCardGap,
-                mainAxisSpacing: NumberConstant.favoriteGridRowGap,
-                childAspectRatio: NumberConstant.favoriteCardWidth /
-                    (NumberConstant.favoriteCardImageHeight + 50),
-              ),
-              itemBuilder: (context, index) {
-                final recipe = favorites[index];
-                return LayoutBuilder(
-                  builder: (context, constraints) => RecipeCard(
-                    recipe: recipe,
-                    width: constraints.maxWidth,
-                    imageHeight: NumberConstant.favoriteCardImageHeight,
-                    showTimeBadge: false,
-                    showFavoriteButton: true,
-                    useSmallTitle: true,
-                    onTap: () => context.push(NamedRoutes.recipeDetailPath(recipe.id)),
-                    onFavoriteTap: () => provider.toggleFavorite(recipe.id),
-                  ),
-                );
-              },
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              height: NumberConstant.favoriteSeeAllOverlayHeight,
-              child: IgnorePointer(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: .topCenter,
-                      end: .bottomCenter,
-                      colors: [
-                        AppColors.whiteColor.withValues(alpha: 0),
-                        AppColors.whiteColor.withValues(alpha: 0.94),
-                        AppColors.whiteColor,
-                      ],
-                      stops: const [0, 0.78, 1],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 38,
-              child: Center(child: _buildSeeAllButton()),
-            ),
-          ],
+      padding: .only(top: 17, bottom: 8),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: favorites.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: NumberConstant.favoriteCardGap,
+          mainAxisSpacing: NumberConstant.favoriteGridRowGap,
+          childAspectRatio: NumberConstant.favoriteCardWidth /
+              (NumberConstant.favoriteCardImageHeight + 50),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSeeAllButton() {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.primaryGreenColor,
-        borderRadius: .circular(NumberConstant.primaryButtonRadius),
-      ),
-      child: SizedBox(
-        height: NumberConstant.primaryButtonHeight,
-        child: Padding(
-          padding: .symmetric(horizontal: NumberConstant.primaryButtonHorizontalPadding),
-          child: Center(child: Text(StringConst.seeAll, style: AppTextStyles.primaryButton,),),
-        ),
+        itemBuilder: (context, index) {
+          final recipe = favorites[index];
+          return LayoutBuilder(
+            builder: (context, constraints) => RecipeCard(
+              recipe: recipe,
+              width: constraints.maxWidth,
+              imageHeight: NumberConstant.favoriteCardImageHeight,
+              showTimeBadge: false,
+              showFavoriteButton: true,
+              useSmallTitle: true,
+              onTap: () => context.push(NamedRoutes.recipeDetailPath(recipe.id)),
+              onFavoriteTap: () => provider.toggleFavorite(recipe.id),
+            ),
+          );
+        },
       ),
     );
   }
